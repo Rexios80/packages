@@ -1,4 +1,4 @@
-name: standard_message_codec_examples
+name: standard_message_codec_example
 description: Example code for standard message codec usage
 version: 0.0.1
 publish_to: none

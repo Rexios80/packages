@@ -1,4 +1,4 @@
-name: example
+name: file_selector_macos_example
 description: Example for file_selector_macos implementation.
 publish_to: 'none'
 version: 1.0.0

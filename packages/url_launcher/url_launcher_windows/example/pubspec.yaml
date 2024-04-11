@@ -1,4 +1,4 @@
-name: url_launcher_example
+name: url_launcher_windows_example
 description: Demonstrates the Windows implementation of the url_launcher plugin.
 publish_to: none
 

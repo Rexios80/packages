@@ -1,4 +1,4 @@
-name: image_colors
+name: palette_generator_example
 description: A simple example of how to use the PaletteGenerator to load the palette from an image file.
 publish_to: none
 version: 0.1.0

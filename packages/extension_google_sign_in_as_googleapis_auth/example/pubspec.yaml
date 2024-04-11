@@ -1,4 +1,4 @@
-name: extension_google_sign_in_example
+name: extension_google_sign_in_as_googleapis_auth_example
 description: Example of Google Sign-In plugin and googleapis.
 publish_to: none
 

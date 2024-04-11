@@ -1,4 +1,4 @@
-name: example
+name: image_picker_linux_example
 description: Example for image_picker_linux implementation.
 publish_to: 'none'
 version: 1.0.0

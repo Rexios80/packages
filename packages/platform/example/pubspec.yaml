@@ -1,4 +1,4 @@
-name: plaform_example
+name: platform_example
 description: Demonstrates how to use the plaform plugin.
 publish_to: 'none'
 version: 1.0.0+1

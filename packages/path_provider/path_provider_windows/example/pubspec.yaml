@@ -1,4 +1,4 @@
-name: path_provider_example
+name: path_provider_windows_example
 description: Demonstrates how to use the path_provider plugin.
 publish_to: none
 

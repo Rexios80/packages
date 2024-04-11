@@ -1,4 +1,4 @@
-name: shared_preferences_example
+name: shared_preferences_foundation_example
 description: Testbed for the shared_preferences_foundation implementation.
 publish_to: none
 
