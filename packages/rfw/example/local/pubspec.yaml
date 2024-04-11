@@ -1,4 +1,4 @@
-name: local
+name: rfw_example_local
 description: Example of new custom local widgets for RFW
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
