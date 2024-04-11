@@ -1,4 +1,4 @@
-name: repos_exampley_project
+name: puby_benchmarking
 
 packages:
   - packages/**
