@@ -85,7 +85,7 @@ class GoogleMapsInspectorIOS extends GoogleMapsInspectorPlatform {
 
   @override
   Future<Heatmap?> getHeatmapInfo(HeatmapId heatmapId,
-      {required int mapId}) async {
+      {required int mapId, required void Function() onTap}) async {
     final Map<String, Object?>? heatmapInfo = await _channelProvider(mapId)!
         .invokeMapMethod<String, dynamic>(
             'map#getHeatmapInfo', <String, String>{
@@ -96,6 +96,7 @@ class GoogleMapsInspectorIOS extends GoogleMapsInspectorPlatform {
     }
 
     return Heatmap(
+      onTap: onTap,
       heatmapId: heatmapId,
       data: (heatmapInfo['data']! as List<Object?>)
           .map(deserializeWeightedLatLng)
@@ -103,7 +104,9 @@ class GoogleMapsInspectorIOS extends GoogleMapsInspectorPlatform {
           .toList(),
       gradient: deserializeHeatmapGradient(heatmapInfo['gradient']),
       opacity: heatmapInfo['opacity']! as double,
-      radius: HeatmapRadius.fromJson(heatmapInfo['radius']),
+      radius: HeatmapRadius.fromPlatformSpecificValue(
+        heatmapInfo['radius']! as int,
+      ),
       minimumZoomIntensity: heatmapInfo['minimumZoomIntensity']! as int,
       maximumZoomIntensity: heatmapInfo['maximumZoomIntensity']! as int,
     );
