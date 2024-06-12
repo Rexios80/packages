@@ -116,7 +116,7 @@ class Heatmap implements MapsObject<Heatmap> {
   final int maximumZoomIntensity;
   /// Callbacks to do something whenever we tapped on heatmap so that we can perform
   /// some action on that.
-final   VoidCallback? onTap;
+final  void Function() onTap;
 
   /// Creates a new [Heatmap] object whose values are the same as this
   /// instance, unless overwritten by the specified parameters.
@@ -129,7 +129,7 @@ final   VoidCallback? onTap;
     HeatmapRadius? radiusParam,
     int? minimumZoomIntensityParam,
     int? maximumZoomIntensityParam,
-  VoidCallback?  onTapParam,
+ void Function()?  onTapParam,
   }) {
     return Heatmap(
       heatmapId: heatmapId,
@@ -199,8 +199,22 @@ final   VoidCallback? onTap;
     onTap == other.onTap;
   }
 
+  // @override
+  // int get hashCode => heatmapId.hashCode;
   @override
-  int get hashCode => heatmapId.hashCode;
+  int get hashCode => Object.hash(
+    heatmapId,
+    data,
+    dissipating,
+    gradient,
+    maxIntensity,
+    opacity,
+    radius,
+    minimumZoomIntensity,
+    maximumZoomIntensity,
+    onTap,
+  );
+
 }
 
 /// A data point entry for a heatmap.
