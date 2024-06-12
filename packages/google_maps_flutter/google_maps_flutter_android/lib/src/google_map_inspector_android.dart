@@ -85,7 +85,7 @@ class GoogleMapsInspectorAndroid extends GoogleMapsInspectorPlatform {
 
   @override
   Future<Heatmap?> getHeatmapInfo(HeatmapId heatmapId,
-      {required int mapId,required void Function() onTap}) async {
+      {required int mapId,required  VoidCallback? onTap}) async {
     final Map<String, Object?>? heatmapInfo = await _channelProvider(mapId)!
         .invokeMapMethod<String, dynamic>(
             'map#getHeatmapInfo', <String, String>{
