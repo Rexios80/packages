@@ -65,8 +65,9 @@ class Heatmap implements MapsObject<Heatmap> {
   /// Creates an immutable representation of a [Heatmap] to draw on
   /// [GoogleMap].
   const Heatmap({
+    required this.onTap,
     required this.heatmapId,
-    required this.data,
+    this.data = const <WeightedLatLng>[],
     this.dissipating = true,
     this.gradient,
     this.maxIntensity,
@@ -83,8 +84,6 @@ class Heatmap implements MapsObject<Heatmap> {
   HeatmapId get mapsId => heatmapId;
 
   /// The data points to display.
-  ///
-  /// This list must not be empty.
   final List<WeightedLatLng> data;
 
   /// Specifies whether heatmaps dissipate on zoom.
@@ -115,6 +114,9 @@ class Heatmap implements MapsObject<Heatmap> {
 
   /// The maximum zoom intensity used for normalizing intensities.
   final int maximumZoomIntensity;
+  /// Callbacks to do something whenever we tapped on heatmap so that we can perform
+  /// some action on that.
+final  void Function() onTap;
 
   /// Creates a new [Heatmap] object whose values are the same as this
   /// instance, unless overwritten by the specified parameters.
@@ -127,6 +129,7 @@ class Heatmap implements MapsObject<Heatmap> {
     HeatmapRadius? radiusParam,
     int? minimumZoomIntensityParam,
     int? maximumZoomIntensityParam,
+ void Function()?  onTapParam,
   }) {
     return Heatmap(
       heatmapId: heatmapId,
@@ -138,6 +141,7 @@ class Heatmap implements MapsObject<Heatmap> {
       radius: radiusParam ?? radius,
       minimumZoomIntensity: minimumZoomIntensityParam ?? minimumZoomIntensity,
       maximumZoomIntensity: maximumZoomIntensityParam ?? maximumZoomIntensity,
+      onTap: onTapParam ?? onTap,
     );
   }
 
@@ -169,6 +173,7 @@ class Heatmap implements MapsObject<Heatmap> {
     addIfPresent('radius', radius.pixels);
     addIfPresent('minimumZoomIntensity', minimumZoomIntensity);
     addIfPresent('maximumZoomIntensity', maximumZoomIntensity);
+    addIfPresent('onTap', onTap);
 
     return json;
   }
@@ -190,7 +195,8 @@ class Heatmap implements MapsObject<Heatmap> {
         opacity == other.opacity &&
         radius == other.radius &&
         minimumZoomIntensity == other.minimumZoomIntensity &&
-        maximumZoomIntensity == other.maximumZoomIntensity;
+        maximumZoomIntensity == other.maximumZoomIntensity &&
+    onTap == other.onTap;
   }
 
   @override
