@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 
-import 'google_maps_flutter_android.dart';
+import 'serialization.dart';
 
 /// An Android of implementation of [GoogleMapsInspectorPlatform].
 @visibleForTesting
@@ -84,6 +84,34 @@ class GoogleMapsInspectorAndroid extends GoogleMapsInspectorPlatform {
   }
 
   @override
+  Future<Heatmap?> getHeatmapInfo(HeatmapId heatmapId,
+      {required int mapId,required void Function() onTap}) async {
+    final Map<String, Object?>? heatmapInfo = await _channelProvider(mapId)!
+        .invokeMapMethod<String, dynamic>(
+            'map#getHeatmapInfo', <String, String>{
+      'heatmapId': heatmapId.value,
+    });
+    if (heatmapInfo == null) {
+      return null;
+    }
+
+    return Heatmap(
+      onTap:onTap ,
+      heatmapId: heatmapId,
+      data: (heatmapInfo['data']! as List<Object?>)
+          .map(deserializeWeightedLatLng)
+          .whereType<WeightedLatLng>()
+          .toList(),
+      gradient: deserializeHeatmapGradient(heatmapInfo['gradient']),
+      maxIntensity: heatmapInfo['maxIntensity']! as double,
+      opacity: heatmapInfo['opacity']! as double,
+      radius: HeatmapRadius.fromPlatformSpecificValue(
+        heatmapInfo['radius']! as int,
+      ),
+    );
+  }
+
+  @override
   Future<bool> isCompassEnabled({required int mapId}) async {
     return (await _channelProvider(mapId)!
         .invokeMethod<bool>('map#isCompassEnabled'))!;
@@ -111,24 +139,5 @@ class GoogleMapsInspectorAndroid extends GoogleMapsInspectorPlatform {
   Future<bool> isTrafficEnabled({required int mapId}) async {
     return (await _channelProvider(mapId)!
         .invokeMethod<bool>('map#isTrafficEnabled'))!;
-  }
-
-  @override
-  Future<List<Cluster>> getClusters({
-    required int mapId,
-    required ClusterManagerId clusterManagerId,
-  }) async {
-    final List<dynamic> data = (await _channelProvider(mapId)!
-        .invokeMethod<List<dynamic>>('clusterManager#getClusters',
-            <String, String>{'clusterManagerId': clusterManagerId.value}))!;
-    return data.map<Cluster>((dynamic clusterData) {
-      final Map<String, dynamic> clusterDataMap =
-          Map<String, dynamic>.from(clusterData as Map<dynamic, dynamic>);
-      return GoogleMapsFlutterAndroid.parseCluster(
-          clusterDataMap['clusterManagerId']! as String,
-          clusterDataMap['position']! as Object,
-          clusterDataMap['bounds']! as Map<dynamic, dynamic>,
-          clusterDataMap['markerIds']! as List<dynamic>);
-    }).toList();
   }
 }
