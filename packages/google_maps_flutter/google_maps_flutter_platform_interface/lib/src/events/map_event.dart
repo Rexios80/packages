@@ -93,6 +93,14 @@ class MarkerTapEvent extends MapEvent<MarkerId> {
   MarkerTapEvent(super.mapId, super.markerId);
 }
 
+/// Heat map tap event
+class HeatmapTapEvent extends MapEvent<HeatmapId> {
+  /// Build a HeatmapTap Event triggered from the map represented by `mapId`.
+  ///
+  /// The `value` of this event is a [HeatmapId] object that represents the tapped Heatmap.
+  HeatmapTapEvent(super.mapId, super.heatmapId);
+}
+
 /// An event fired when an [InfoWindow] is tapped.
 class InfoWindowTapEvent extends MapEvent<MarkerId> {
   /// Build an InfoWindowTap Event triggered from the map represented by `mapId`.
