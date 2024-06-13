@@ -79,6 +79,10 @@ class GoogleMapController {
         .listen((MapTapEvent e) => _googleMapState.onTap(e.position));
     GoogleMapsFlutterPlatform.instance.onLongPress(mapId: mapId).listen(
         (MapLongPressEvent e) => _googleMapState.onLongPress(e.position));
+    
+    /// Heatmap onTap
+    GoogleMapsFlutterPlatform.instance.onHeatmapTap(mapId: mapId).listen(
+        (HeatmapTapEvent e) => _googleMapState.onHeatmapTap(e.value));
   }
 
   /// Updates configuration options of the map user interface.
