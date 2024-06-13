@@ -470,6 +470,17 @@ class _GoogleMapState extends State<GoogleMap> {
     }
   }
 
+  /// Heat map tapped
+  void onHeatmapTap(HeatmapId heatmapId) {
+    final Heatmap? heatmap = _heatmaps[heatmapId];
+    if (heatmap == null) {
+      throw UnknownMapObjectIdError('heatmap', heatmapId, 'onTap');
+    }
+    final VoidCallback? onTap = heatmap.onTap;
+    if (onTap != null) {
+      onTap();
+    }
+  }
   void onMarkerDragStart(MarkerId markerId, LatLng position) {
     final Marker? marker = _markers[markerId];
     if (marker == null) {
