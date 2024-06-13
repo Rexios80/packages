@@ -116,7 +116,7 @@ class Heatmap implements MapsObject<Heatmap> {
   final int maximumZoomIntensity;
   /// Callbacks to do something whenever we tapped on heatmap so that we can perform
   /// some action on that.
-final  void Function() onTap;
+final  VoidCallback? onTap;
 
   /// Creates a new [Heatmap] object whose values are the same as this
   /// instance, unless overwritten by the specified parameters.
@@ -129,7 +129,7 @@ final  void Function() onTap;
     HeatmapRadius? radiusParam,
     int? minimumZoomIntensityParam,
     int? maximumZoomIntensityParam,
- void Function()?  onTapParam,
+ VoidCallback??  onTapParam,
   }) {
     return Heatmap(
       heatmapId: heatmapId,
