@@ -119,6 +119,10 @@ class GoogleMapsFlutterIOS extends GoogleMapsFlutterPlatform {
     return _events(mapId).whereType<MarkerTapEvent>();
   }
 
+@override
+  Stream<HeatmapTapEvent> onHeatmapTap({required int mapId}) {
+    return _events(mapId).whereType<HeatmapTapEvent>();
+  }
   @override
   Stream<InfoWindowTapEvent> onInfoWindowTap({required int mapId}) {
     return _events(mapId).whereType<InfoWindowTapEvent>();
