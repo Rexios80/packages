@@ -123,6 +123,11 @@ class MethodChannelGoogleMapsFlutter extends GoogleMapsFlutterPlatform {
   }
 
   @override
+  Stream<HeatmapTapEvent> onHeatmapTap({required int mapId}) {
+    return _events(mapId).whereType<HeatmapTapEvent>();
+  }
+
+  @override
   Stream<InfoWindowTapEvent> onInfoWindowTap({required int mapId}) {
     return _events(mapId).whereType<InfoWindowTapEvent>();
   }
@@ -196,6 +201,13 @@ class MethodChannelGoogleMapsFlutter extends GoogleMapsFlutterPlatform {
           mapId,
           LatLng.fromJson(arguments['position'])!,
           MarkerId(arguments['markerId']! as String),
+        ));
+        
+        case 'heatmap#onTap':
+        final Map<String, Object?> arguments = _getArgumentDictionary(call);
+        _mapEventStreamController.add(HeatmapTapEvent(
+          mapId,
+          HeatmapId(arguments['heatmapId']! as String),
         ));
       case 'marker#onDrag':
         final Map<String, Object?> arguments = _getArgumentDictionary(call);
