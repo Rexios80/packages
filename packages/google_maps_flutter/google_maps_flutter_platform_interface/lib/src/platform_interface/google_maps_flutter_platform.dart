@@ -339,6 +339,10 @@ abstract class GoogleMapsFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('onMarkerTap() has not been implemented.');
   }
 
+  /// A [Heatmap] has been tapped.
+  Stream<HeatmapTapEvent> onHeatmapTap({required int mapId}) {
+    throw UnimplementedError('onHeatmapTap() has not been implemented.');
+  }
   /// An [InfoWindow] has been tapped.
   Stream<InfoWindowTapEvent> onInfoWindowTap({required int mapId}) {
     throw UnimplementedError('onInfoWindowTap() has not been implemented.');
