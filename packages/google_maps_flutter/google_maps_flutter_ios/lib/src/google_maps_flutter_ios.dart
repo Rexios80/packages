@@ -186,6 +186,12 @@ class GoogleMapsFlutterIOS extends GoogleMapsFlutterPlatform {
           mapId,
           MarkerId(arguments['markerId']! as String),
         ));
+      case 'heatmap#onTap':
+        final Map<String, Object?> arguments = _getArgumentDictionary(call);
+        _mapEventStreamController.add(HeatmapTapEvent(
+          mapId,
+          HeatmapId(arguments['heatmapId']! as String),
+        ));
       case 'marker#onDragStart':
         final Map<String, Object?> arguments = _getArgumentDictionary(call);
         _mapEventStreamController.add(MarkerDragStartEvent(
@@ -667,3 +673,4 @@ class _TileOverlayUpdates extends MapsObjectUpdates<TileOverlay> {
   /// Set of TileOverlays to be changed in this update.
   Set<TileOverlay> get tileOverlaysToChange => objectsToChange;
 }
+  
