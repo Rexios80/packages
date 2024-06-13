@@ -129,7 +129,7 @@ final  VoidCallback? onTap;
     HeatmapRadius? radiusParam,
     int? minimumZoomIntensityParam,
     int? maximumZoomIntensityParam,
- VoidCallback??  onTapParam,
+ VoidCallback?  onTapParam,
   }) {
     return Heatmap(
       heatmapId: heatmapId,
